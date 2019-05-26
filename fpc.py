@@ -164,7 +164,7 @@ class Candidate:
 
     def isFPX(self):
         """Page marked with FPX template"""
-        return len(re.findall(FpxR, self.page.get(get_redirect=True)))
+        return FpxR(self.page.get(get_redirect=True))
 
     def rulesOfFifthDay(self):
         """Check if any of the rules of the fifth day can be applied"""
@@ -1454,7 +1454,7 @@ KeepR = re.compile(r"{{\s*(?:%s)(\|.*)?\s*}}" % "|".join(keep_templates), DOTALL
 # must be able to detect after the pipe symbol
 WithdrawnR = re.compile(r"{{\s*[wW]ithdrawn?\s*(\|.*)?}}", DOTALL).search
 # Nomination that contain the fpx template
-FpxR = re.compile(r"{{\s*FPX(\|.*)?}}", DOTALL)
+FpxR = re.compile(r"{{\s*FPX(\|.*)?}}", DOTALL).search
 # Counts the number of displayed images
 ImagesR = re.compile(r"\[\[((?:[Ff]ile|[Ii]mage):[^|]+).*?\]\]")
 # Look for a size specification of the image link
