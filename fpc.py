@@ -29,7 +29,7 @@ import threading, time
 from pywikibot import config
 
 
-COMMONS = pywikibot.Site('commons', 'commons')
+COMMONS = pywikibot.Site("commons", "commons")
 
 
 class NotImplementedException(Exception):
@@ -160,8 +160,7 @@ class Candidate:
         """Withdrawn nominations should not be counted"""
         text = self.page.get(get_redirect=True)
         text = filter_content(text)
-        withdrawn = len(re.findall(WithdrawnR, text))
-        return withdrawn > 0
+        return WithdrawnR(text)
 
     def isFPX(self):
         """Page marked with FPX template"""
@@ -1453,7 +1452,7 @@ KeepR = re.compile(r"{{\s*(?:%s)(\|.*)?\s*}}" % "|".join(keep_templates), DOTALL
 # Finds if a withdraw template is used
 # This template has an optional string which we
 # must be able to detect after the pipe symbol
-WithdrawnR = re.compile(r"{{\s*[wW]ithdrawn?\s*(\|.*)?}}", DOTALL)
+WithdrawnR = re.compile(r"{{\s*[wW]ithdrawn?\s*(\|.*)?}}", DOTALL).search
 # Nomination that contain the fpx template
 FpxR = re.compile(r"{{\s*FPX(\|.*)?}}", DOTALL)
 # Counts the number of displayed images
