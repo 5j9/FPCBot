@@ -22,6 +22,7 @@ It adds the following commandline arguments:
 """
 
 import pywikibot, re, datetime, sys, difflib, signal
+from re import DOTALL
 
 # Imports needed for threading
 import threading, time
@@ -1444,25 +1445,17 @@ DelistReviewedTemplateR = re.compile(
 # Is whitespace allowed at the end ?
 SectionR = re.compile(r"^={1,4}.+={1,4}\s*$", re.MULTILINE)
 # Voting templates
-SupportR = re.compile(
-    r"{{\s*(?:%s)(\|.*)?\s*}}" % "|".join(support_templates), re.MULTILINE
-)
-OpposeR = re.compile(
-    r"{{\s*(?:%s)(\|.*)?\s*}}" % "|".join(oppose_templates), re.MULTILINE
-)
-NeutralR = re.compile(
-    r"{{\s*(?:%s)(\|.*)?\s*}}" % "|".join(neutral_templates), re.MULTILINE
-)
-DelistR = re.compile(
-    r"{{\s*(?:%s)(\|.*)?\s*}}" % "|".join(delist_templates), re.MULTILINE
-)
-KeepR = re.compile(r"{{\s*(?:%s)(\|.*)?\s*}}" % "|".join(keep_templates), re.MULTILINE)
+SupportR = re.compile(r"{{\s*(?:%s)(\|.*)?\s*}}" % "|".join(support_templates), DOTALL)
+OpposeR = re.compile(r"{{\s*(?:%s)(\|.*)?\s*}}" % "|".join(oppose_templates), DOTALL)
+NeutralR = re.compile(r"{{\s*(?:%s)(\|.*)?\s*}}" % "|".join(neutral_templates), DOTALL)
+DelistR = re.compile(r"{{\s*(?:%s)(\|.*)?\s*}}" % "|".join(delist_templates), DOTALL)
+KeepR = re.compile(r"{{\s*(?:%s)(\|.*)?\s*}}" % "|".join(keep_templates), DOTALL)
 # Finds if a withdraw template is used
 # This template has an optional string which we
 # must be able to detect after the pipe symbol
-WithdrawnR = re.compile(r"{{\s*[wW]ithdrawn?\s*(\|.*)?}}", re.MULTILINE)
+WithdrawnR = re.compile(r"{{\s*[wW]ithdrawn?\s*(\|.*)?}}", DOTALL)
 # Nomination that contain the fpx template
-FpxR = re.compile(r"{{\s*FPX(\|.*)?}}", re.MULTILINE)
+FpxR = re.compile(r"{{\s*FPX(\|.*)?}}", DOTALL)
 # Counts the number of displayed images
 ImagesR = re.compile(r"\[\[((?:[Ff]ile|[Ii]mage):[^|]+).*?\]\]")
 # Look for a size specification of the image link
