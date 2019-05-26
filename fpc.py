@@ -351,7 +351,7 @@ class Candidate:
 
         try:
             lastEdit = datetime.datetime.strptime(
-                str(self.page.editTime()), "%Y%m%d%H%M%S"
+                str(self.page.editTime()), "%Y-%m-%dT%H:%M:%SZ"
             )
         except:
             return -1
@@ -1491,7 +1491,7 @@ G_Abort = False
 def main(*args):
 
     fpcPage = "Commons:Featured picture candidates/candidate_list"
-    delistPage = "Commons:Featured picture candidates/candidate_list"
+    delistPage = "Commons:Featured_picture_candidates/removal"
     testLog = "Commons:Featured_picture_candidates/Log/January_2009"
 
     worked = False
